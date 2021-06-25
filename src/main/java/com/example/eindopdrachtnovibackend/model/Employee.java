@@ -18,14 +18,24 @@ public class Employee {
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
+    private Integer age;
 
     public Employee(){
 
     }
 
-    public Employee(String firstName, String lastName) {
+    public Employee(String firstName, String lastName, Integer age) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.age = age;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     public long getId() {
