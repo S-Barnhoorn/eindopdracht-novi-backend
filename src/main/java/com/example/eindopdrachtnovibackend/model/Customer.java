@@ -16,18 +16,28 @@ public class Customer {
     private String lastName;
     private String residence;
     private String emailAdress;
+    private Integer phoneNumber;
     private int age;
 
     public Customer(){
 
     }
 
-    public Customer(String firstName, String lastName, String residence, String emailAdress, int age) {
+    public Customer(String firstName, String lastName, String residence, String emailAdress, int phoneNumber, int age) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.residence = residence;
         this.emailAdress = emailAdress;
+        this.phoneNumber = phoneNumber;
         this.age = age;
+    }
+
+    public Integer getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(Integer phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public long getId() {
