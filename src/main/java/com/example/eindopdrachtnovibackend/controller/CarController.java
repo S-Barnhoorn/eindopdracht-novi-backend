@@ -1,9 +1,7 @@
 package com.example.eindopdrachtnovibackend.controller;
 
 import com.example.eindopdrachtnovibackend.model.Car;
-import com.example.eindopdrachtnovibackend.model.Customer;
-import com.example.eindopdrachtnovibackend.repository.CarRepository;
-import com.example.eindopdrachtnovibackend.service.CustomerService;
+import com.example.eindopdrachtnovibackend.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,46 +11,49 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/")
-public class CarController  {
+public class CarController {
+
+
     @Autowired
     private CarService carService;
+
     //krijgt verzoek binnen
-    @GetMapping("/customer")
-    public ResponseEntity<Object> getCustomers() {
-        return ResponseEntity.ok(customerService.getCustomers());
+    @GetMapping("/cars")
+    public ResponseEntity<Object> getCar() {
+        return ResponseEntity.ok(carService.getCar());
     }
+
     //create employee rest API
-    @PostMapping("/customer")
-    public ResponseEntity<Object> addCustomer (@RequestBody Customer customer) {
-        customerService.addCustomer(customer);
+    @PostMapping("/cars")
+    public ResponseEntity<Object> addCar(@RequestBody Car car) {
+        carService.addCar(car);
         return ResponseEntity.ok("Added");
     }
+
     //get 1 employee
     //krijgt verzoek binnen
-    @GetMapping("/customer/{id}")
-    public ResponseEntity<Object> getCustomers(@PathVariable("id") long id) {
-        Customer customer = customerService.getCustomer(id);
-        return ResponseEntity.ok(customer);
+    @GetMapping("/cars/{id}")
+    public ResponseEntity<Object> getCar(@PathVariable("id") long id) {
+        Car car = carService.getCar(id);
+        return ResponseEntity.ok(car);
     }
+
     //query to search on firstname (customers/firstname?firstname=David
-    @GetMapping("/customer/firstname")
-    public Customer getCustomer(@RequestParam String firstname) {
-        return customerService.getByFirstName(firstname);
-    }
-    @PutMapping("/customer/{id}")
-    public ResponseEntity<Object> updateCustomer(@PathVariable("id") long id, @RequestBody Customer updateCustomer) {
-        customerService.updateCustomer(id, updateCustomer);
+    @PutMapping("/cars/{id}")
+    public ResponseEntity<Object> updateCar(@PathVariable("id") long id, @RequestBody Car updateCar) {
+        carService.updateCar(id, updateCar);
         return ResponseEntity.noContent().build();
     }
-    @DeleteMapping("/customer/{id}")
-    public ResponseEntity<Object> removeCustomer(@PathVariable("id") long id) {
-        customerService.removeCustomer(id);
+
+    @DeleteMapping("/cars/{id}")
+    public ResponseEntity<Object> removeCar(@PathVariable("id") long id) {
+        carService.removeCar(id);
         return ResponseEntity.noContent().build().ok("Deleted");
     }
+}
