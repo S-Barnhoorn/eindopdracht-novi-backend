@@ -17,12 +17,12 @@ import java.util.Optional;
         public CustomerServiceImpl(CustomerRepository customerRepository) {
             this.customerRepository = customerRepository;
         }
-        //    private List<Customer> customers = new ArrayList<>();
+
         @Override
         public List<Customer> getCustomers() {
             return customerRepository.findAll();
-//        return customers;
         }
+
         @Override
         public Customer getCustomer ( long id) {
             Optional<Customer> customer = customerRepository.findById(id);
@@ -35,13 +35,12 @@ import java.util.Optional;
 
         @Override
         public Customer addCustomer (Customer customer){
-//            customers.add(customer);
             return customerRepository.save(customer);
         }
+
         @Override
         public void removeCustomer ( long id){
             customerRepository.deleteById(id);
-//    
         }
             
         @Override

@@ -15,54 +15,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
-//@RestController
-//@RequestMapping("/api/v1/")
-//public class CustomerController {
-//
-//    @Autowired
-//    private CustomerRepository customerRepository;
-//
-//    @GetMapping("/customers")
-//    public List<Customer> getAllCustomers(){
-//        return customerRepository.findAll();
-//    }
-//
-//    @PostMapping("/customers")
-//    public Customer createCustomer(@RequestBody Customer customer){
-//        return customerRepository.save(customer);
-//    }
-//}
-
 @RestController
 @RequestMapping("/api/v1/")
 public class CustomerController  {
+
     @Autowired
     private CustomerService customerService;
-    //krijgt verzoek binnen
+
     @GetMapping("/customer")
     public ResponseEntity<Object> getCustomers() {
         return ResponseEntity.ok(customerService.getCustomers());
     }
-    //create employee rest API
+
     @PostMapping("/customer")
     public ResponseEntity<Object> addCustomer (@RequestBody Customer customer) {
         customerService.addCustomer(customer);
         return ResponseEntity.ok("Added");
     }
-    //get 1 employee
-    //krijgt verzoek binnen
+
     @GetMapping("/customer/{id}")
     public ResponseEntity<Object> getCustomers(@PathVariable("id") long id) {
         Customer customer = customerService.getCustomer(id);
         return ResponseEntity.ok(customer);
     }
-    //query to search on firstname (customers/firstname?firstname=David
+
     @GetMapping("/customer/firstname")
     public Customer getCustomer(@RequestParam String firstname) {
         return customerService.getByFirstName(firstname);
     }
+
     @PutMapping("/customer/{id}")
     public ResponseEntity<Object> updateCustomer(@PathVariable("id") long id, @RequestBody Customer updateCustomer) {
         customerService.updateCustomer(id, updateCustomer);

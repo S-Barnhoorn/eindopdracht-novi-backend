@@ -1,8 +1,13 @@
 package com.example.eindopdrachtnovibackend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,6 +24,11 @@ public class Customer {
     private Integer phoneNumber;
     private int age;
 
+    @OneToOne
+    @Cascade(CascadeType.ALL)
+    @JsonManagedReference
+    private Car car;
+
     public Customer(){
 
     }
@@ -30,6 +40,14 @@ public class Customer {
         this.emailAdress = emailAdress;
         this.phoneNumber = phoneNumber;
         this.age = age;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
     }
 
     public Integer getPhoneNumber() {
