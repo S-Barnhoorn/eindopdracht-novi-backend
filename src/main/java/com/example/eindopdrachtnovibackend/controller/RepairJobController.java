@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -37,6 +38,11 @@ import org.springframework.web.bind.annotation.RestController;
         public ResponseEntity<Object> getRepairJob(@PathVariable("id") long id) {
             RepairJob repairJob = repairJobService.getRepairJob(id);
             return ResponseEntity.ok(repairJob);
+        }
+
+        @GetMapping("/repair-jobs/customerAgrees")
+        public RepairJob getByCustomerAgrees(@RequestParam String customerAgrees){
+            return repairJobService.getByCustomerAgrees(customerAgrees);
         }
 
 

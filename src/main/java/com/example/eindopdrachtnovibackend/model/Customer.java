@@ -1,5 +1,6 @@
 package com.example.eindopdrachtnovibackend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -29,6 +30,10 @@ public class Customer {
     @JsonManagedReference
     private Car car;
 
+    @OneToOne(mappedBy = "customer")
+    @JsonBackReference
+    private RepairJob repairJob;
+
     public Customer(){
 
     }
@@ -40,6 +45,14 @@ public class Customer {
         this.emailAdress = emailAdress;
         this.phoneNumber = phoneNumber;
         this.age = age;
+    }
+
+    public RepairJob getRepairJob() {
+        return repairJob;
+    }
+
+    public void setRepairJob(RepairJob repairJob) {
+        this.repairJob = repairJob;
     }
 
     public Car getCar() {

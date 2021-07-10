@@ -1,6 +1,7 @@
 package com.example.eindopdrachtnovibackend.service;
 
 import com.example.eindopdrachtnovibackend.exception.RecordNotFoundException;
+import com.example.eindopdrachtnovibackend.model.RepairItem;
 import com.example.eindopdrachtnovibackend.model.RepairJob;
 import com.example.eindopdrachtnovibackend.repository.RepairJobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,16 @@ public class RepairJobServiceImpl implements RepairJobService {
     }
 
     @Override
+    public RepairJob getByCustomerAgrees(String customerAgrees){
+        Optional<RepairJob> optionalRepairJob = repairJobRepository.findRepairJobsByCustomerAgrees(customerAgrees);
+        if(optionalRepairJob.isPresent()){
+            return optionalRepairJob.get();
+        } else{
+            throw new RecordNotFoundException("Repair-job does not exist");
+        }
+    }
+
+    @Override
     public RepairJob addRepairJob (RepairJob repairJob){
         return repairJobRepository.save(repairJob);
     }
@@ -42,7 +53,6 @@ public class RepairJobServiceImpl implements RepairJobService {
     @Override
     public void removeRepairJob(long id) {
         repairJobRepository.deleteById(id);
-
     }
 
     @Override

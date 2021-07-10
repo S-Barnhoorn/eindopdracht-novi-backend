@@ -2,6 +2,7 @@ package com.example.eindopdrachtnovibackend.controller;
 
 
 import com.example.eindopdrachtnovibackend.exception.BadRequestException;
+import com.example.eindopdrachtnovibackend.exception.FileStorageException;
 import com.example.eindopdrachtnovibackend.exception.RecordNotFoundException;
 import com.example.eindopdrachtnovibackend.exception.UsernameNotFoundException;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,11 @@ public class ExceptionController {
 
     @ExceptionHandler(value = UsernameNotFoundException.class)
     public ResponseEntity<Object> exception(UsernameNotFoundException exception) {
+        return ResponseEntity.badRequest().build();
+    }
+
+    @ExceptionHandler(value = FileStorageException.class)
+    public ResponseEntity<Object> exception(FileStorageException exception) {
         return ResponseEntity.badRequest().build();
     }
 

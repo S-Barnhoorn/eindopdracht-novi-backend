@@ -1,6 +1,7 @@
 package com.example.eindopdrachtnovibackend.service;
 
 import com.example.eindopdrachtnovibackend.model.Customer;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -14,5 +15,5 @@ public interface CustomerService {
         Customer getByFirstName(String firstname);
         Customer getByPhoneNumber(Integer phoneNumber);
 
-    }
+}
 

@@ -17,11 +17,12 @@ import java.util.Optional;
         public CarServiceImpl(CarRepository carRepository) {
             this.carRepository = carRepository;
         }
-        //    private List<Customer> customers = new ArrayList<>();
+
+
         @Override
         public List<Car> getCar() {
             return carRepository.findAll();
-//        return customers;
+
         }
         @Override
         public Car getCar ( long id) {
@@ -35,13 +36,13 @@ import java.util.Optional;
 
         @Override
         public Car addCar (Car car){
-//            car.add(car);
+;
             return carRepository.save(car);
         }
         @Override
         public void removeCar ( long id){
             carRepository.deleteById(id);
-//
+
         }
 
         @Override
