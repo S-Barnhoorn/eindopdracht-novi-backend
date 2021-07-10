@@ -39,6 +39,7 @@ public class RepairItemController{
         return ResponseEntity.ok(repairItem);
     }
 
+    @GetMapping("/")
 
     @PutMapping("/repair-items/{id}")
     public ResponseEntity<Object> updateRepairItem(@PathVariable("id") long id, @RequestBody RepairItem updateRepairItem) {

@@ -1,5 +1,6 @@
 package com.example.eindopdrachtnovibackend.controller;
 
+import com.example.eindopdrachtnovibackend.exception.RecordNotFoundException;
 import com.example.eindopdrachtnovibackend.model.Customer;
 import com.example.eindopdrachtnovibackend.repository.CustomerRepository;
 import com.example.eindopdrachtnovibackend.service.CustomerService;
@@ -57,6 +58,14 @@ public class CustomerController  {
         return ResponseEntity.noContent().build().ok("Deleted");
     }
 
+//    @PostMapping("/customer/{id}/drivers-license")
+//    public void uploadDriversLicense(@PathVariable("id") Long id, @RequestParam("file") MultipartFile){
+//        try{
+//            CustomerService.uploadDriversLicense(id, file);
+//        } catch (Exception e){
+//            throw new RecordNotFoundException("File doesn't exist");
+//        }
+//    }
 
 //    @GetMapping("/customer/phonenumber")
 //    public Customer getCustomer(@RequestParam Integer phonenumber){

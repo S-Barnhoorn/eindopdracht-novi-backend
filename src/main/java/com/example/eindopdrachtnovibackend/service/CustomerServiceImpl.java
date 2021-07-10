@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -34,7 +35,7 @@ import java.util.Optional;
         }
 
         @Override
-        public Customer getCustomer ( long id) {
+        public Customer getCustomer(long id) {
             Optional<Customer> customer = customerRepository.findById(id);
             if (customer.isPresent()) {
                 return customer.get();
@@ -44,17 +45,17 @@ import java.util.Optional;
         }
 
         @Override
-        public Customer addCustomer (Customer customer){
+        public Customer addCustomer(Customer customer) {
             return customerRepository.save(customer);
         }
 
         @Override
-        public void removeCustomer ( long id){
+        public void removeCustomer(long id) {
             customerRepository.deleteById(id);
         }
-            
+
         @Override
-        public void updateCustomer (long id, Customer updateCustomer) {
+        public void updateCustomer(long id, Customer updateCustomer) {
             Optional<Customer> optionalCustomer = customerRepository.findById(id);
             if (optionalCustomer.isPresent()) {
                 customerRepository.save(updateCustomer);
@@ -62,7 +63,7 @@ import java.util.Optional;
                 throw new RecordNotFoundException("Person does not exist");
             }
         }
-        //query search
+
         @Override
         public Customer getByFirstName(String firstname) {
             Optional<Customer> optionalCustomer = customerRepository.findCustomerByFirstName(firstname);
@@ -74,13 +75,15 @@ import java.util.Optional;
         }
 
         @Override
-        public Customer getByPhoneNumber(Integer phoneNumber){
+        public Customer getByPhoneNumber(Integer phoneNumber) {
             Optional<Customer> optionalCustomer = customerRepository.findCustomerByPhoneNumber(phoneNumber);
-            if(optionalCustomer.isPresent()){
+            if (optionalCustomer.isPresent()) {
                 return optionalCustomer.get();
-            } else{
+            } else {
                 throw new RecordNotFoundException("Phonenumber invalid");
             }
         }
     }
+
+
 
