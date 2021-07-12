@@ -2,6 +2,9 @@ package com.example.eindopdrachtnovibackend.controller;
 
 import com.example.eindopdrachtnovibackend.service.FileUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.annotation.Resource;
 
 @RestController
 @RequestMapping("api/v1/")
@@ -31,15 +36,21 @@ public class FileUploadController {
         fileUploadService.getFileById(id);
         return ResponseEntity.ok(fileUploadService.getFileById(id));
     }
-//    @GetMapping("/repair-items/{id}")
-//    public ResponseEntity<Object> getRepairItem(@PathVariable("id") long id) {
-//        RepairItem repairItem = repairItemService.getRepairItem(id);
-//        return ResponseEntity.ok(repairItem);
-//    }
 
 //    @GetMapping("/files/id")
 //    public ResponseEntity<Object> getFileData(@PathVariable long id) {
 //        return ResponseEntity.ok(fileUploadService.getFileById(id));
+//    }
+
+//    @GetMapping("/files/{id}/download")
+//    public ResponseEntity downloadFile(@PathVariable long id) {
+//
+//        Resource resource = FileUploadService.downloadFile(id);
+//        String mediaType = "application/octet-stream";
+//        return ResponseEntity.ok()
+//                .contentType(MediaType.parseMediaType(mediaType))
+//                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + ((UrlResource) resource).getFilename() + "\"")
+//                .body(resource);
 //    }
 
     @PostMapping("/files")

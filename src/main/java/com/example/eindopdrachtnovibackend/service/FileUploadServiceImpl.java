@@ -1,13 +1,21 @@
 package com.example.eindopdrachtnovibackend.service;
 
+import com.example.eindopdrachtnovibackend.exception.FileStorageException;
 import com.example.eindopdrachtnovibackend.exception.RecordNotFoundException;
 import com.example.eindopdrachtnovibackend.model.FileUpload;
 import com.example.eindopdrachtnovibackend.repository.FileUploadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Optional;
 
 @Service
@@ -27,21 +35,46 @@ public class FileUploadServiceImpl implements FileUploadService {
     @Override
     public long uploadFile(MultipartFile file) {
         String originalFilename = StringUtils.cleanPath(file.getOriginalFilename());
-//        Path copyLocation = Paths.get(uploadDir + File.separator + originalFilename);
-//
-//        try {
-//            Files.copy(file.getInputStream(), copyLocation, StandardCopyOption.REPLACE_EXISTING);
-//        } catch (Exception e) {
-//            throw new FileStorageException("Could not store file " + originalFilename + ". Please try again!");
-//        }
+        String uploadDir = "./Uploads";
+        Path copyLocation = Paths.get(uploadDir + File.separator + originalFilename);
+
+        try {
+            Files.copy(file.getInputStream(), copyLocation, StandardCopyOption.REPLACE_EXISTING);
+        } catch (Exception e) {
+            throw new FileStorageException("Could not store file " + originalFilename + ". Please try again!");
+        }
 
         FileUpload newFileToStore = new FileUpload();
         newFileToStore.setFileName(originalFilename);
-//        newFileToStore.setLocation(copyLocation.toString());
+        newFileToStore.setLocation(copyLocation.toString());
 
         FileUpload storedFile = fileUploadRepository.save(newFileToStore);
+        System.out.println(storedFile);
 
         return storedFile.getId();
+    }
+
+    @Override
+    public UrlResource downloadFile(long id) {
+        final Path uploads = Paths.get("./Uploads");
+        Optional<FileUpload> stored = fileUploadRepository.findById(id);
+
+        if (stored.isPresent()) {
+            String filename = stored.get().getFileName();
+            Path path = uploads.resolve(filename);
+
+            UrlResource resource = null;
+            try {
+                resource = new UrlResource(path.toUri());
+                return resource;
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            throw new RecordNotFoundException("error");
+        }
+        return null;
     }
 
     @Override
