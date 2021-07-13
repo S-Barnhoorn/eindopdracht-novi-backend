@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import org.springframework.core.io.Resource;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
@@ -54,16 +55,18 @@ public class FileUploadServiceImpl implements FileUploadService {
         return storedFile.getId();
     }
 
+
+
     @Override
-    public UrlResource downloadFile(long id) {
-        final Path uploads = Paths.get("./Uploads");
+    public Resource downloadFile(long id) {
+        Path uploads = Paths.get("./Uploads");
         Optional<FileUpload> stored = fileUploadRepository.findById(id);
 
         if (stored.isPresent()) {
             String filename = stored.get().getFileName();
             Path path = uploads.resolve(filename);
 
-            UrlResource resource = null;
+            Resource resource = null;
             try {
                 resource = new UrlResource(path.toUri());
                 return resource;

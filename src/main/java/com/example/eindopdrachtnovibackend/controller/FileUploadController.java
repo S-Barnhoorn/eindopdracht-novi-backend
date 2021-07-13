@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.Resource;
+import org.springframework.core.io.Resource;
 
 @RestController
 @RequestMapping("api/v1/")
@@ -42,16 +42,17 @@ public class FileUploadController {
 //        return ResponseEntity.ok(fileUploadService.getFileById(id));
 //    }
 
-//    @GetMapping("/files/{id}/download")
-//    public ResponseEntity downloadFile(@PathVariable long id) {
-//
-//        Resource resource = FileUploadService.downloadFile(id);
-//        String mediaType = "application/octet-stream";
-//        return ResponseEntity.ok()
-//                .contentType(MediaType.parseMediaType(mediaType))
-//                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + ((UrlResource) resource).getFilename() + "\"")
-//                .body(resource);
-//    }
+    @GetMapping("/files/{id}/download")
+    public ResponseEntity downloadFile(@PathVariable("id") long id) {
+
+        Resource resource = fileUploadService.downloadFile(id);
+        String mediaType = "application/octet-stream";
+        String fileName = fileUploadService.getFileById(id).getFileName();
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(mediaType))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
+                .body(resource);
+    }
 
     @PostMapping("/files")
     public ResponseEntity<Object> uploadFile(@RequestBody MultipartFile file) {

@@ -4,6 +4,8 @@ import com.example.eindopdrachtnovibackend.model.FileUpload;
 import org.springframework.core.io.UrlResource;
 import org.springframework.web.multipart.MultipartFile;
 
+import org.springframework.core.io.Resource;
+
 public interface FileUploadService {
 
     Iterable<FileUpload> getFiles();
@@ -11,7 +13,7 @@ public interface FileUploadService {
     boolean fileExistsById(long id);
     long uploadFile(MultipartFile file);
     void deleteFile(long id);
-    UrlResource downloadFile(long id);
+    Resource downloadFile(long id);
 
 
 }
