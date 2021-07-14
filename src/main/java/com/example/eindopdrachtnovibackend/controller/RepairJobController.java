@@ -1,5 +1,7 @@
 package com.example.eindopdrachtnovibackend.controller;
 
+import com.example.eindopdrachtnovibackend.controller.dto.CustomerDto;
+import com.example.eindopdrachtnovibackend.model.Customer;
 import com.example.eindopdrachtnovibackend.model.RepairJob;
 import com.example.eindopdrachtnovibackend.service.RepairJobService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
-    @RestController
+@RestController
     @RequestMapping("/api/v1/")
     public class RepairJobController{
 
@@ -41,8 +45,19 @@ import org.springframework.web.bind.annotation.RestController;
         }
 
         @GetMapping("/repair-jobs/customerAgrees")
-        public RepairJob getByCustomerAgrees(@RequestParam String customerAgrees){
-            return repairJobService.getByCustomerAgrees(customerAgrees);
+        public List<CustomerDto> getByCustomerAgrees(@RequestParam String customerAgrees){
+
+            var repairjobs = repairJobService.getByCustomerAgrees(customerAgrees);
+            var phonenumbers = new ArrayList<CustomerDto>();
+//            var lastname = new ArrayList<CustomerDto>();
+//            var firstname = new ArrayList<CustomerDto>();
+            for (int i = 0; i < repairjobs.size(); i++) {
+                var dto =  CustomerDto.fromCustomer(repairjobs.get(i).getCustomer());
+                phonenumbers.add(dto);
+//                lastname.add(dto);
+//                firstname.add(dto);
+            }
+            return phonenumbers;
         }
 
 
