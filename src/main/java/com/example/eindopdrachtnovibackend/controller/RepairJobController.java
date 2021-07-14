@@ -1,6 +1,7 @@
 package com.example.eindopdrachtnovibackend.controller;
 
 import com.example.eindopdrachtnovibackend.controller.dto.CustomerDto;
+import com.example.eindopdrachtnovibackend.controller.dto.RepairDto;
 import com.example.eindopdrachtnovibackend.model.Customer;
 import com.example.eindopdrachtnovibackend.model.RepairJob;
 import com.example.eindopdrachtnovibackend.service.RepairJobService;
@@ -33,8 +34,8 @@ import java.util.List;
         }
 
         @PostMapping("/repair-jobs")
-        public ResponseEntity<Object> addRepairJob (@RequestBody RepairJob repairJob) {
-            repairJobService.addRepairJob(repairJob);
+        public ResponseEntity<Object> addRepairJob (@RequestBody RepairDto repairDto) {
+            repairJobService.addRepairJob(repairDto);
             return ResponseEntity.ok("Added");
         }
 
@@ -49,13 +50,9 @@ import java.util.List;
 
             var repairjobs = repairJobService.getByCustomerAgrees(customerAgrees);
             var phonenumbers = new ArrayList<CustomerDto>();
-//            var lastname = new ArrayList<CustomerDto>();
-//            var firstname = new ArrayList<CustomerDto>();
             for (int i = 0; i < repairjobs.size(); i++) {
                 var dto =  CustomerDto.fromCustomer(repairjobs.get(i).getCustomer());
                 phonenumbers.add(dto);
-//                lastname.add(dto);
-//                firstname.add(dto);
             }
             return phonenumbers;
         }

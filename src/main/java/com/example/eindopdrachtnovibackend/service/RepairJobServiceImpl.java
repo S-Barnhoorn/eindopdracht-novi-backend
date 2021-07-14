@@ -1,9 +1,11 @@
 package com.example.eindopdrachtnovibackend.service;
 
+import com.example.eindopdrachtnovibackend.controller.dto.RepairDto;
 import com.example.eindopdrachtnovibackend.exception.RecordNotFoundException;
 import com.example.eindopdrachtnovibackend.model.Customer;
 import com.example.eindopdrachtnovibackend.model.RepairItem;
 import com.example.eindopdrachtnovibackend.model.RepairJob;
+import com.example.eindopdrachtnovibackend.repository.CustomerRepository;
 import com.example.eindopdrachtnovibackend.repository.RepairJobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,11 @@ public class RepairJobServiceImpl implements RepairJobService {
     public RepairJobServiceImpl(RepairJobRepository repairJobRepository) {
         this.repairJobRepository = repairJobRepository;
     }
+
+    @Autowired
+    private CustomerRepository customerRepository;
+
+
 
     @Override
     public List<RepairJob> getRepairJob() {
@@ -53,7 +60,13 @@ public class RepairJobServiceImpl implements RepairJobService {
     }
 
     @Override
-    public RepairJob addRepairJob (RepairJob repairJob){
+    public RepairJob addRepairJob (RepairDto repairDto){
+        RepairJob repairJob = new RepairJob();
+        repairJob.setActions(repairDto.getActions());
+        repairJob.setExamination(repairDto.getExamination());
+        repairJob.setCustomerAgrees(repairDto.getCustomerAgrees());
+        Customer customer = customerRepository.findById(repairDto.getCustomerId()).orElse(null);
+        repairJob.setCustomer(customer);
         return repairJobRepository.save(repairJob);
     }
 
