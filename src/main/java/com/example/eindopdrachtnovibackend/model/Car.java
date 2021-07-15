@@ -1,6 +1,7 @@
 package com.example.eindopdrachtnovibackend.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
@@ -23,8 +24,9 @@ public class Car {
     private String dayOfCarCheck;
     private String dayOfRepairJob;
 
-    @OneToOne(mappedBy = "car")
-    @JsonBackReference
+    @OneToOne
+    @Cascade(CascadeType.ALL)
+    @JsonManagedReference
     private Customer customer;
 
     @OneToMany(mappedBy = "car")

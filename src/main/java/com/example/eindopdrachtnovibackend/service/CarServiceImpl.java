@@ -1,8 +1,13 @@
 package com.example.eindopdrachtnovibackend.service;
 
+import com.example.eindopdrachtnovibackend.controller.dto.CarDto;
+import com.example.eindopdrachtnovibackend.controller.dto.RepairDto;
 import com.example.eindopdrachtnovibackend.exception.RecordNotFoundException;
 import com.example.eindopdrachtnovibackend.model.Car;
+import com.example.eindopdrachtnovibackend.model.Customer;
+import com.example.eindopdrachtnovibackend.model.RepairJob;
 import com.example.eindopdrachtnovibackend.repository.CarRepository;
+import com.example.eindopdrachtnovibackend.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +22,9 @@ import java.util.Optional;
         public CarServiceImpl(CarRepository carRepository) {
             this.carRepository = carRepository;
         }
+
+        @Autowired
+        private CustomerRepository customerRepository;
 
 
         @Override
@@ -35,10 +43,17 @@ import java.util.Optional;
         }
 
         @Override
-        public Car addCar (Car car){
+        public Car addCar (CarDto carDto){
+            Car car = new Car();
+            car.setLicensePlate(carDto.getLicensePlate());
+            car.setDayOfCarCheck(carDto.getDayOfCarCheck());
+            car.setDayOfRepairJob(carDto.getDayOfRepairJob());
+            Customer customer = customerRepository.findById(carDto.getCustomerId()).orElse(null);
+            car.setCustomer(customer);
 ;
             return carRepository.save(car);
         }
+
         @Override
         public void removeCar ( long id){
             carRepository.deleteById(id);

@@ -2,9 +2,19 @@ package com.example.eindopdrachtnovibackend.controller.dto;
 
 public class RepairDto {
     private long customerId;
+    private long repairJobId;
     private String examination;
     private String customerAgrees;
     private String actions;
+
+
+    public long getRepairJobId() {
+        return repairJobId;
+    }
+
+    public void setRepairJobId(long repairJobId) {
+        this.repairJobId = repairJobId;
+    }
 
     public long getCustomerId() {
         return customerId;

@@ -26,9 +26,9 @@ public class Customer {
     private Integer phoneNumber;
     private int age;
 
-    @OneToOne
-    @Cascade(CascadeType.ALL)
-    @JsonManagedReference
+
+    @OneToOne(mappedBy = "customer")
+    @JsonBackReference
     private Car car;
 
     @OneToOne(mappedBy = "customer")

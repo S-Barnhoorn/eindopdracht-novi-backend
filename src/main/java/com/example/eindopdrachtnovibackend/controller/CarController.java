@@ -1,5 +1,6 @@
 package com.example.eindopdrachtnovibackend.controller;
 
+import com.example.eindopdrachtnovibackend.controller.dto.CarDto;
 import com.example.eindopdrachtnovibackend.model.Car;
 import com.example.eindopdrachtnovibackend.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,8 @@ public class CarController {
 
     //create employee rest API
     @PostMapping("/cars")
-    public ResponseEntity<Object> addCar(@RequestBody Car car) {
-        carService.addCar(car);
+    public ResponseEntity<Object> addCar(@RequestBody CarDto carDto) {
+        carService.addCar(carDto);
         return ResponseEntity.ok("Added");
     }
 
