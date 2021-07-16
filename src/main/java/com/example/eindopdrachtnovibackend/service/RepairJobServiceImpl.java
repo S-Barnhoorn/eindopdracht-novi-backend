@@ -62,7 +62,6 @@ public class RepairJobServiceImpl implements RepairJobService {
     @Override
     public RepairJob addRepairJob (RepairDto repairDto){
         RepairJob repairJob = new RepairJob();
-        repairJob.setActions(repairDto.getActions());
         repairJob.setExamination(repairDto.getExamination());
         repairJob.setCustomerAgrees(repairDto.getCustomerAgrees());
         Customer customer = customerRepository.findById(repairDto.getCustomerId()).orElse(null);

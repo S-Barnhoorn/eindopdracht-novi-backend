@@ -24,32 +24,39 @@ public class Car {
     private String dayOfCarCheck;
     private String dayOfRepairJob;
 
+//    @OneToMany(mappedBy = "car")
+//    private List<RepairJob> repairJobs;
+
     @OneToOne
     @Cascade(CascadeType.ALL)
-    @JsonManagedReference
     private Customer customer;
-
-    @OneToMany(mappedBy = "car")
-    private List<RepairJob> repairJobs;
 
     public Car(){
 
     }
 
-    public Car(String licensePlate, String dayOfCarCheck, String dayOfRepairJob, Customer customer, List<RepairJob> repairJobs) {
+    public Car(String licensePlate, String dayOfCarCheck, String dayOfRepairJob, List<RepairJob> repairJobs) {
         this.licensePlate = licensePlate;
         this.dayOfCarCheck = dayOfCarCheck;
         this.dayOfRepairJob = dayOfRepairJob;
-        this.customer = customer;
-        this.repairJobs = repairJobs;
+
+//        this.repairJobs = repairJobs;
     }
 
-    public List<RepairJob> getRepairjobs() {
-        return repairJobs;
+//    public List<RepairJob> getRepairjobs() {
+//        return repairJobs;
+//    }
+//
+//    public void setRepairjobs(List<RepairJob> repairjobs) {
+//        this.repairJobs = repairjobs;
+//    }
+
+    public long getId() {
+        return id;
     }
 
-    public void setRepairjobs(List<RepairJob> repairjobs) {
-        this.repairJobs = repairjobs;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public Customer getCustomer() {
@@ -58,14 +65,6 @@ public class Car {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getLicensePlate() {

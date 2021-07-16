@@ -50,7 +50,6 @@ import java.util.Optional;
             car.setDayOfRepairJob(carDto.getDayOfRepairJob());
             Customer customer = customerRepository.findById(carDto.getCustomerId()).orElse(null);
             car.setCustomer(customer);
-;
             return carRepository.save(car);
         }
 

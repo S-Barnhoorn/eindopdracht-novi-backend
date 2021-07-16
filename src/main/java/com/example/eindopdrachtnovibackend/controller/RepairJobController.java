@@ -2,8 +2,10 @@ package com.example.eindopdrachtnovibackend.controller;
 
 import com.example.eindopdrachtnovibackend.controller.dto.CustomerDto;
 import com.example.eindopdrachtnovibackend.controller.dto.RepairDto;
+import com.example.eindopdrachtnovibackend.controller.dto.RepairItemDto;
 import com.example.eindopdrachtnovibackend.model.Customer;
 import com.example.eindopdrachtnovibackend.model.RepairJob;
+import com.example.eindopdrachtnovibackend.service.RepairItemService;
 import com.example.eindopdrachtnovibackend.service.RepairJobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,11 +24,14 @@ import java.util.List;
 
 
 @RestController
-    @RequestMapping(value = "/api/v1/", produces = "application/json")
+    @RequestMapping("/api/v1/")
     public class RepairJobController{
 
         @Autowired
         private RepairJobService repairJobService;
+
+        @Autowired
+        private RepairItemService repairItemService;
 
         @GetMapping("/repair-jobs")
         public ResponseEntity<Object> getRepairJob() {
@@ -35,6 +40,7 @@ import java.util.List;
 
         @PostMapping("/repair-jobs")
         public ResponseEntity<Object> addRepairJob (@RequestBody RepairDto repairDto) {
+            System.out.println(repairDto);
             repairJobService.addRepairJob(repairDto);
             return ResponseEntity.ok("Added");
         }
@@ -60,9 +66,11 @@ import java.util.List;
 
         @PutMapping("/repair-jobs/{id}")
         public ResponseEntity<Object> updateRepairJob(@PathVariable("id") long id, @RequestBody RepairJob updateRepairJob) {
+            System.out.println(updateRepairJob);
             repairJobService.updateRepairJob(id, updateRepairJob);
             return ResponseEntity.noContent().build();
         }
+
         @DeleteMapping("/repair-jobs/{id}")
         public ResponseEntity<Object> removeRepairJob(@PathVariable("id") long id) {
             repairJobService.removeRepairJob(id);

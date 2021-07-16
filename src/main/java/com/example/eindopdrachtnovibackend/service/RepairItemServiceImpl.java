@@ -4,7 +4,6 @@ import com.example.eindopdrachtnovibackend.exception.RecordNotFoundException;
 import com.example.eindopdrachtnovibackend.model.RepairItem;
 import com.example.eindopdrachtnovibackend.model.RepairJob;
 import com.example.eindopdrachtnovibackend.repository.RepairItemRepository;
-import com.example.eindopdrachtnovibackend.repository.RepairJobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,5 +55,6 @@ public class RepairItemServiceImpl implements RepairItemService{
             throw new RecordNotFoundException("Person does not exist");
         }
     }
+
 }
 

@@ -26,11 +26,6 @@ public class Customer {
     private Integer phoneNumber;
     private int age;
 
-
-    @OneToOne(mappedBy = "customer")
-    @JsonBackReference
-    private Car car;
-
     @OneToOne(mappedBy = "customer")
     @JsonBackReference
     private RepairJob repairJob;
@@ -57,13 +52,6 @@ public class Customer {
         this.repairJob = repairJob;
     }
 
-    public Car getCar() {
-        return car;
-    }
-
-    public void setCar(Car car) {
-        this.car = car;
-    }
 
     public Integer getPhoneNumber() {
         return phoneNumber;

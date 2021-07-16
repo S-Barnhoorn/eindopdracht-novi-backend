@@ -4,6 +4,8 @@ package com.example.eindopdrachtnovibackend.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -28,6 +30,9 @@ public class RepairItem {
     private String brakeDiscs;
     private Integer brakeDiscsPrice;
     private Integer brakeDiscsQuantity;
+
+    @OneToOne
+    private RepairJob repairJob;
 
     public RepairItem(){
 
@@ -56,6 +61,14 @@ public class RepairItem {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public RepairJob getRepairJob() {
+        return repairJob;
+    }
+
+    public void setRepairJob(RepairJob repairJob) {
+        this.repairJob = repairJob;
     }
 
     public String getInspection() {

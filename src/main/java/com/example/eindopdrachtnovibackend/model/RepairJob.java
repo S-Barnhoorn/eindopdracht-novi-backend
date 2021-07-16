@@ -8,8 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table
@@ -21,10 +23,14 @@ public class RepairJob {
 
     private String examination;
     private String customerAgrees;
-    private String actions;
 
-    @ManyToOne
-    private Car car;
+
+
+//    @ManyToOne
+//    private Car car;
+
+    @OneToOne(mappedBy = "repairJob")
+    private RepairItem repairItem;
 
     @OneToOne
     @Cascade(CascadeType.ALL)
@@ -37,6 +43,14 @@ public class RepairJob {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public RepairItem getRepairItem() {
+        return repairItem;
+    }
+
+    public void setRepairItem(RepairItem repairItem) {
+        this.repairItem = repairItem;
     }
 
     public String getCustomerAgrees() {
@@ -55,14 +69,6 @@ public class RepairJob {
         this.customer = customer;
     }
 
-    public String getActions() {
-        return actions;
-    }
-
-    public void setActions(String actions) {
-        this.actions = actions;
-    }
-
     public String getExamination() {
         return examination;
     }
@@ -71,11 +77,11 @@ public class RepairJob {
         this.examination = examination;
     }
 
-    public Car getCar() {
-        return car;
-    }
-
-    public void setCar(Car car) {
-        this.car = car;
-    }
+//    public Car getCar() {
+//        return car;
+//    }
+//
+//    public void setCar(Car car) {
+//        this.car = car;
+//    }
 }
