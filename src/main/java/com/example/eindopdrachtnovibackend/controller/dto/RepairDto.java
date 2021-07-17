@@ -7,6 +7,15 @@ public class RepairDto {
     private String examination;
     private String customerAgrees;
     private String actions;
+    private RepairItemDto repairItemDto;
+
+    public RepairItemDto getRepairItemDto() {
+        return repairItemDto;
+    }
+
+    public void setRepairItemDto(RepairItemDto repairItemDto) {
+        this.repairItemDto = repairItemDto;
+    }
 
     public long getCustomerId() {
         return customerId;
