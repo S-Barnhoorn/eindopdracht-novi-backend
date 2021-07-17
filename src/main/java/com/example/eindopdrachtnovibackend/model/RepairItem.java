@@ -1,8 +1,11 @@
 package com.example.eindopdrachtnovibackend.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -32,6 +35,7 @@ public class RepairItem {
     private Integer brakeDiscsQuantity;
 
     @ManyToOne
+    @JsonBackReference
     private RepairJob repairJob;
 
     public RepairItem(){

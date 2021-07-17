@@ -5,6 +5,8 @@ import com.example.eindopdrachtnovibackend.controller.dto.RepairDto;
 import com.example.eindopdrachtnovibackend.controller.dto.RepairItemDto;
 import com.example.eindopdrachtnovibackend.model.Customer;
 import com.example.eindopdrachtnovibackend.model.RepairJob;
+import com.example.eindopdrachtnovibackend.model.RepairItem;
+import com.example.eindopdrachtnovibackend.repository.RepairItemRepository;
 import com.example.eindopdrachtnovibackend.service.RepairItemService;
 import com.example.eindopdrachtnovibackend.service.RepairJobService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +33,7 @@ import java.util.List;
         private RepairJobService repairJobService;
 
         @Autowired
-        private RepairItemService repairItemService;
+        private RepairItemRepository repairItemRepository;
 
         @GetMapping("/repair-jobs")
         public ResponseEntity<Object> getRepairJob() {
@@ -40,7 +42,6 @@ import java.util.List;
 
         @PostMapping("/repair-jobs")
         public ResponseEntity<Object> addRepairJob (@RequestBody RepairDto repairDto) {
-            System.out.println(repairDto);
             repairJobService.addRepairJob(repairDto);
             return ResponseEntity.ok("Added");
         }

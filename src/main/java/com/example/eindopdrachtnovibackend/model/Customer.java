@@ -7,6 +7,7 @@ import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToOne;
@@ -23,7 +24,7 @@ public class Customer {
     private String lastName;
     private String residence;
     private String emailAdress;
-    private Integer phoneNumber;
+    private String phoneNumber;
     private int age;
 
     @OneToOne(mappedBy = "customer")
@@ -34,7 +35,7 @@ public class Customer {
 
     }
 
-    public Customer(String firstName, String lastName, String residence, String emailAdress, int phoneNumber, int age) {
+    public Customer(String firstName, String lastName, String residence, String emailAdress, String phoneNumber, int age) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.residence = residence;
@@ -53,11 +54,11 @@ public class Customer {
     }
 
 
-    public Integer getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

@@ -3,7 +3,7 @@ package com.example.eindopdrachtnovibackend.controller.dto;
 import com.example.eindopdrachtnovibackend.model.Customer;
 
 public class CustomerDto {
-    public Integer phoneNumber;
+    public String phoneNumber;
     public String firstName;
     public String lastName;
     public static CustomerDto fromCustomer(Customer customer) {

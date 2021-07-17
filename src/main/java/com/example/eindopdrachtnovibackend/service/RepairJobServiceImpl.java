@@ -1,6 +1,7 @@
 package com.example.eindopdrachtnovibackend.service;
 
 import com.example.eindopdrachtnovibackend.controller.dto.RepairDto;
+import com.example.eindopdrachtnovibackend.exception.BadRequestException;
 import com.example.eindopdrachtnovibackend.exception.RecordNotFoundException;
 import com.example.eindopdrachtnovibackend.model.Customer;
 import com.example.eindopdrachtnovibackend.model.RepairItem;
@@ -26,14 +27,15 @@ public class RepairJobServiceImpl implements RepairJobService {
     @Autowired
     private CustomerRepository customerRepository;
 
-//    @Autowired
-//    private RepairItemRepository repairItemRepository;
+    @Autowired
+    private RepairItemRepository repairItemRepository;
 
 
 
     @Override
     public List<RepairJob> getRepairJob() {
         return repairJobRepository.findAll();
+
     }
 
     @Override
@@ -62,15 +64,32 @@ public class RepairJobServiceImpl implements RepairJobService {
         return optionalRepairJob;
     }
 
-    @Override
-    public RepairJob addRepairJob (RepairDto repairDto){
-        RepairJob repairJob = RepairDto.toRepairJob(repairDto);
-        repairJob.setExamination(repairDto.getExamination());
-        repairJob.setCustomerAgrees(repairDto.getCustomerAgrees());
-        Customer customer = customerRepository.findById(repairDto.getCustomerId()).orElse(null);
-        repairJob.setCustomer(customer);
-        return repairJobRepository.save(repairJob);
+//    @Override
+//    public RepairJob addRepairJob (RepairDto repairDto){
+//        RepairJob repairJob =  RepairDto.toRepairJob(repairDto);
+//        RepairItem repairItem = new RepairItem();
+//        repairJob.setExamination(repairDto.getExamination());
+//        repairJob.setCustomerAgrees(repairDto.getCustomerAgrees());
+//        Customer customer = customerRepository.findById(repairDto.getCustomerId()).orElse(null);
+//        repairJob.setCustomer(customer);
+//        return repairJobRepository.save(repairJob);
+//    }
+@Override
+public RepairJob addRepairJob (RepairDto repairDto){
+    RepairJob repairJob = RepairDto.toRepairJob(repairDto);
+    repairJob.setExamination(repairDto.getExamination());
+    repairJob.setCustomerAgrees(repairDto.getCustomerAgrees());
+    Customer customer = customerRepository.findById(repairDto.getCustomerId()).orElse(null);
+
+    //Customer should only have one RepairJob
+    if (customer.getRepairJob()!=null) throw new BadRequestException();
+    repairJob.setCustomer(customer);
+    repairJob =  repairJobRepository.save(repairJob);
+    for(RepairItem repairItem:repairJob.getRepairItem()){
+        repairItemRepository.save(repairItem);
     }
+    return repairJob;
+}
 
     @Override
     public void removeRepairJob(long id) {
