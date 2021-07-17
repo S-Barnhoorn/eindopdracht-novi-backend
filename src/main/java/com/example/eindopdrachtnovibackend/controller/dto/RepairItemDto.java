@@ -1,5 +1,7 @@
 package com.example.eindopdrachtnovibackend.controller.dto;
 
+import com.example.eindopdrachtnovibackend.model.RepairItem;
+import com.example.eindopdrachtnovibackend.model.RepairJob;
 import lombok.Data;
 
 @Data
@@ -20,4 +22,18 @@ public class RepairItemDto {
     private Integer brakeDiscsPrice;
     private Integer brakeDiscsQuantity;
 
+
+    public static RepairItemDto fromRepairItem(RepairItem repairItem) {
+        var dto = new RepairItemDto();
+        dto.engine = repairItem.getEngine();
+        return dto;
+    }
+
+    public static RepairItem toRepairItem(RepairItemDto dto, RepairJob repairJob) {
+        var item = new RepairItem();
+        item.setEngine(dto.engine);
+        // this is the important bit, Item owns the relation!!!
+        item.setRepairJob(repairJob);
+        return item;
+    }
 }

@@ -31,7 +31,7 @@ public class RepairItem {
     private Integer brakeDiscsPrice;
     private Integer brakeDiscsQuantity;
 
-    @OneToOne
+    @ManyToOne
     private RepairJob repairJob;
 
     public RepairItem(){

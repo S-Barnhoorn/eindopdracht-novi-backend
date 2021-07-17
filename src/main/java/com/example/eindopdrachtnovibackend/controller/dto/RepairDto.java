@@ -1,20 +1,41 @@
 package com.example.eindopdrachtnovibackend.controller.dto;
 
 import com.example.eindopdrachtnovibackend.model.RepairItem;
+import com.example.eindopdrachtnovibackend.model.RepairJob;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class RepairDto {
     private long customerId;
     private String examination;
     private String customerAgrees;
     private String actions;
-    private RepairItemDto repairItemDto;
+    private List<RepairItemDto> repairItemList;
 
-    public RepairItemDto getRepairItemDto() {
-        return repairItemDto;
+    public static RepairDto fromRepairJob(RepairJob repairJob) {
+        var dto = new RepairDto();
+//        dto.id = list.getId();
+//        dto.name = list.getName();
+        dto.repairItemList = repairJob.getRepairItem().stream().map(RepairItemDto::fromRepairItem).collect(Collectors.toList());
+        return dto;
     }
 
-    public void setRepairItemDto(RepairItemDto repairItemDto) {
-        this.repairItemDto = repairItemDto;
+    public static RepairJob toRepairJob(RepairDto repairDto) {
+        var list = new RepairJob();
+//        list.setId(dto.id);
+//        list.setName(dto.name);
+        list.setRepairItem(repairDto.repairItemList.stream().map(itemDto -> RepairItemDto.toRepairItem(itemDto, list)).collect(Collectors.toList()));
+
+        return list;
+    }
+
+    public List<RepairItemDto> getRepairItemList() {
+        return repairItemList;
+    }
+
+    public void setRepairItemList(List<RepairItemDto> repairItemList) {
+        this.repairItemList = repairItemList;
     }
 
     public long getCustomerId() {

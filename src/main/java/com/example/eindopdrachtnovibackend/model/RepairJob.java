@@ -29,8 +29,8 @@ public class RepairJob {
 //    @ManyToOne
 //    private Car car;
 
-    @OneToOne(mappedBy = "repairJob")
-    private RepairItem repairItem;
+    @OneToMany(mappedBy = "repairJob")
+    private List<RepairItem> repairItem;
 
     @OneToOne
     @Cascade(CascadeType.ALL)
@@ -45,11 +45,11 @@ public class RepairJob {
         this.id = id;
     }
 
-    public RepairItem getRepairItem() {
+    public List<RepairItem> getRepairItem() {
         return repairItem;
     }
 
-    public void setRepairItem(RepairItem repairItem) {
+    public void setRepairItem(List<RepairItem> repairItem) {
         this.repairItem = repairItem;
     }
 

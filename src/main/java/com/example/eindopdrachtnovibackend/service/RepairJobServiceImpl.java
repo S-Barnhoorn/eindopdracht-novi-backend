@@ -6,6 +6,7 @@ import com.example.eindopdrachtnovibackend.model.Customer;
 import com.example.eindopdrachtnovibackend.model.RepairItem;
 import com.example.eindopdrachtnovibackend.model.RepairJob;
 import com.example.eindopdrachtnovibackend.repository.CustomerRepository;
+import com.example.eindopdrachtnovibackend.repository.RepairItemRepository;
 import com.example.eindopdrachtnovibackend.repository.RepairJobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,12 +26,14 @@ public class RepairJobServiceImpl implements RepairJobService {
     @Autowired
     private CustomerRepository customerRepository;
 
+//    @Autowired
+//    private RepairItemRepository repairItemRepository;
+
 
 
     @Override
     public List<RepairJob> getRepairJob() {
         return repairJobRepository.findAll();
-
     }
 
     @Override
@@ -61,9 +64,7 @@ public class RepairJobServiceImpl implements RepairJobService {
 
     @Override
     public RepairJob addRepairJob (RepairDto repairDto){
-        RepairJob repairJob = new RepairJob();
-        RepairItem repairItem = new RepairItem();
-        repairDto.getRepairItemDto().getEngine();
+        RepairJob repairJob = RepairDto.toRepairJob(repairDto);
         repairJob.setExamination(repairDto.getExamination());
         repairJob.setCustomerAgrees(repairDto.getCustomerAgrees());
         Customer customer = customerRepository.findById(repairDto.getCustomerId()).orElse(null);
