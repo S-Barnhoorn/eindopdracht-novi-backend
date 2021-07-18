@@ -64,6 +64,12 @@ public class RepairJobServiceImpl implements RepairJobService {
         return optionalRepairJob;
     }
 
+    @Override
+    public List<RepairJob> getByRepairStatus(String repairStatus) {
+        List<RepairJob> optionalRepairJob = repairJobRepository.findRepairJobsByRepairStatus(repairStatus);
+        return optionalRepairJob;
+    }
+
 //    @Override
 //    public RepairJob addRepairJob (RepairDto repairDto){
 //        RepairJob repairJob =  RepairDto.toRepairJob(repairDto);
@@ -79,6 +85,7 @@ public RepairJob addRepairJob (RepairDto repairDto){
     RepairJob repairJob = RepairDto.toRepairJob(repairDto);
     repairJob.setExamination(repairDto.getExamination());
     repairJob.setCustomerAgrees(repairDto.getCustomerAgrees());
+    repairJob.setRepairStatus(repairDto.getRepairStatus());
     Customer customer = customerRepository.findById(repairDto.getCustomerId()).orElse(null);
 
     //Customer should only have one RepairJob

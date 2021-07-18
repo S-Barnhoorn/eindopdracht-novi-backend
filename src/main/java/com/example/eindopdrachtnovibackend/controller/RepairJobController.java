@@ -2,12 +2,8 @@ package com.example.eindopdrachtnovibackend.controller;
 
 import com.example.eindopdrachtnovibackend.controller.dto.CustomerDto;
 import com.example.eindopdrachtnovibackend.controller.dto.RepairDto;
-import com.example.eindopdrachtnovibackend.controller.dto.RepairItemDto;
-import com.example.eindopdrachtnovibackend.model.Customer;
 import com.example.eindopdrachtnovibackend.model.RepairJob;
-import com.example.eindopdrachtnovibackend.model.RepairItem;
 import com.example.eindopdrachtnovibackend.repository.RepairItemRepository;
-import com.example.eindopdrachtnovibackend.service.RepairItemService;
 import com.example.eindopdrachtnovibackend.service.RepairJobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -64,6 +60,20 @@ import java.util.List;
             }
             return phonenumbers;
         }
+
+        @GetMapping("repair-jobs/repairStatus")
+            public ArrayList<RepairDto> getByRepairStatus (@RequestParam String repairStatus){
+
+                var repairjobs = repairJobService.getByRepairStatus(repairStatus);
+                var repairStatusCheck = new ArrayList<RepairDto>();
+                for (int i = 0; i < repairjobs.size(); i++) {
+                    var dto = RepairDto.fromRepairStatus(repairjobs.get(i).getCustomer().getRepairJob());
+                    repairStatusCheck.add(dto);
+                }
+                return repairStatusCheck;
+            }
+
+
 
 
         @PutMapping("/repair-jobs/{id}")

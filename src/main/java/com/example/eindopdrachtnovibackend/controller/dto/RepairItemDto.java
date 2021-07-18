@@ -13,15 +13,19 @@ public class RepairItemDto {
     private String exhaustPipe;
     private Integer exhaustPipePrice;
     private Integer exhaustPipeQuantity;
+    private String repairExhaustPipe;
     private String engine;
     private Integer enginePrice;
     private Integer engineQuantity;
+    private String repairEngine;
     private String brakePads;
     private Integer brakePadsPrice;
     private Integer brakePadsQuantity;
+    private String repairBrakePads;
     private String brakeDiscs;
     private Integer brakeDiscsPrice;
     private Integer brakeDiscsQuantity;
+    private String repairBrakeDiscs;
 
 
     public static RepairItemDto fromRepairItem(RepairItem repairItem) {

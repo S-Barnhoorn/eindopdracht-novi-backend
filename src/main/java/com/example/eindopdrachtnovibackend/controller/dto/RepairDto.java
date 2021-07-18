@@ -1,5 +1,6 @@
 package com.example.eindopdrachtnovibackend.controller.dto;
 
+import com.example.eindopdrachtnovibackend.model.Customer;
 import com.example.eindopdrachtnovibackend.model.RepairItem;
 import com.example.eindopdrachtnovibackend.model.RepairJob;
 
@@ -10,8 +11,18 @@ public class RepairDto {
     private long customerId;
     private String examination;
     private String customerAgrees;
-    private String actions;
+    private String repairStatus;
     private List<RepairItemDto> repairItemList;
+
+    public static RepairDto fromRepairStatus(RepairJob repairJob) {
+        if (repairJob == null) return null;
+        var dto = new RepairDto();
+        dto.repairStatus = repairJob.getRepairStatus();
+        dto.examination = repairJob.getExamination();
+        dto.customerAgrees = repairJob.getCustomerAgrees();
+        dto.customerId = repairJob.getId();
+        return dto;
+    }
 
     public static RepairDto fromRepairJob(RepairJob repairJob) {
         var dto = new RepairDto();
@@ -25,6 +36,7 @@ public class RepairDto {
         var list = new RepairJob();
 //        list.setId(dto.id);
 //        list.setName(dto.name);
+
         list.setRepairItem(repairDto.repairItemList.stream().map(itemDto -> RepairItemDto.toRepairItem(itemDto, list)).collect(Collectors.toList()));
 
         return list;
@@ -62,11 +74,11 @@ public class RepairDto {
         this.customerAgrees = customerAgrees;
     }
 
-    public String getActions() {
-        return actions;
+    public String getRepairStatus() {
+        return repairStatus;
     }
 
-    public void setActions(String actions) {
-        this.actions = actions;
+    public void setRepairStatus(String actions) {
+        this.repairStatus = actions;
     }
 }

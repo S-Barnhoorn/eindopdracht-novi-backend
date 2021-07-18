@@ -24,6 +24,7 @@ public class RepairJob {
 
     private String examination;
     private String customerAgrees;
+    private String repairStatus;
 
 //    @ManyToOne
 //    private Car car;
@@ -43,6 +44,14 @@ public class RepairJob {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getRepairStatus() {
+        return repairStatus;
+    }
+
+    public void setRepairStatus(String repairStatus) {
+        this.repairStatus = repairStatus;
     }
 
     public List<RepairItem> getRepairItem() {

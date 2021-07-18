@@ -12,6 +12,7 @@ import java.util.List;
         void removeRepairJob(long id);
         void updateRepairJob(long id, RepairJob repairJob);
         List<RepairJob> getByCustomerAgrees(String customerAgrees);
+        List<RepairJob> getByRepairStatus(String repairStatus);
 
 //        Customer getByFirstName(String firstname);
 //        Customer getByPhoneNumber(Integer phoneNumber);

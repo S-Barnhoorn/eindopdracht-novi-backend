@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface RepairJobRepository extends JpaRepository<RepairJob, Long> {
 
     List<RepairJob> findRepairJobsByCustomerAgrees(String customerAgrees);
+
+    List<RepairJob> findRepairJobsByRepairStatus(String repairStatus);
 }
