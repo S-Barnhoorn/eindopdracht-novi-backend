@@ -1,7 +1,6 @@
 package com.example.eindopdrachtnovibackend.service;
 
 import com.example.eindopdrachtnovibackend.controller.dto.RepairDto;
-import com.example.eindopdrachtnovibackend.exception.BadRequestException;
 import com.example.eindopdrachtnovibackend.exception.RecordNotFoundException;
 import com.example.eindopdrachtnovibackend.model.Customer;
 import com.example.eindopdrachtnovibackend.model.RepairItem;
@@ -48,16 +47,6 @@ public class RepairJobServiceImpl implements RepairJobService {
         }
     }
 
-//    @Override
-//    public Customer getByCustomerAgrees(String customerAgrees) {
-//        Optional<Customer> optionalCustomer = repairJobRepository.findByCustomerAgrrees(customerAgrees);
-//        if (optionalCustomer.isPresent()) {
-//            return optionalCustomer.get();
-//        } else {
-//            throw new RecordNotFoundException("Person does not exist");
-//        }
-//    }
-
     @Override
     public List<RepairJob> getByCustomerAgrees(String customerAgrees) {
         List<RepairJob> optionalRepairJob = repairJobRepository.findRepairJobsByCustomerAgrees(customerAgrees);
@@ -70,16 +59,6 @@ public class RepairJobServiceImpl implements RepairJobService {
         return optionalRepairJob;
     }
 
-//    @Override
-//    public RepairJob addRepairJob (RepairDto repairDto){
-//        RepairJob repairJob =  RepairDto.toRepairJob(repairDto);
-//        RepairItem repairItem = new RepairItem();
-//        repairJob.setExamination(repairDto.getExamination());
-//        repairJob.setCustomerAgrees(repairDto.getCustomerAgrees());
-//        Customer customer = customerRepository.findById(repairDto.getCustomerId()).orElse(null);
-//        repairJob.setCustomer(customer);
-//        return repairJobRepository.save(repairJob);
-//    }
 @Override
 public RepairJob addRepairJob (RepairDto repairDto){
     RepairJob repairJob = RepairDto.toRepairJob(repairDto);
@@ -88,8 +67,6 @@ public RepairJob addRepairJob (RepairDto repairDto){
     repairJob.setRepairStatus(repairDto.getRepairStatus());
     Customer customer = customerRepository.findById(repairDto.getCustomerId()).orElse(null);
 
-    //Customer should only have one RepairJob
-//    if (customer.getRepairJob()!=null) throw new BadRequestException();
     repairJob.setCustomer(customer);
     repairJob =  repairJobRepository.save(repairJob);
     for(RepairItem repairItem:repairJob.getRepairItem()){

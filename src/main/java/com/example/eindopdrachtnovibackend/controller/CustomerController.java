@@ -1,8 +1,7 @@
 package com.example.eindopdrachtnovibackend.controller;
 
-import com.example.eindopdrachtnovibackend.exception.RecordNotFoundException;
+
 import com.example.eindopdrachtnovibackend.model.Customer;
-import com.example.eindopdrachtnovibackend.repository.CustomerRepository;
 import com.example.eindopdrachtnovibackend.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 @RestController
 @RequestMapping("/api/v1/")

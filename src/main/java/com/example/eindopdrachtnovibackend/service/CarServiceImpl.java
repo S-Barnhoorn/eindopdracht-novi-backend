@@ -1,11 +1,9 @@
 package com.example.eindopdrachtnovibackend.service;
 
 import com.example.eindopdrachtnovibackend.controller.dto.CarDto;
-import com.example.eindopdrachtnovibackend.controller.dto.RepairDto;
 import com.example.eindopdrachtnovibackend.exception.RecordNotFoundException;
 import com.example.eindopdrachtnovibackend.model.Car;
 import com.example.eindopdrachtnovibackend.model.Customer;
-import com.example.eindopdrachtnovibackend.model.RepairJob;
 import com.example.eindopdrachtnovibackend.repository.CarRepository;
 import com.example.eindopdrachtnovibackend.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;

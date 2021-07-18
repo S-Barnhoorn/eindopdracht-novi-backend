@@ -4,13 +4,17 @@ import javax.persistence.*;
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
     @Column(nullable = false, unique = true)
     private String username;
+
     @Column(nullable = false, length = 255)
     private String password;
+
     @Column(nullable = false)
     private boolean enabled;
+
     public String getUsername() {
         return username;
     }

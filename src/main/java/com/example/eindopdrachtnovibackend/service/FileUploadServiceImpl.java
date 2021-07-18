@@ -82,7 +82,6 @@ public class FileUploadServiceImpl implements FileUploadService {
 
     @Override
     public void deleteFile(long id) {
-//        if (!fileUploadRepository.existsById(id)) throw new RecordNotFoundException("file doesn't exist");
         fileUploadRepository.deleteById(id);
     }
 
@@ -90,8 +89,6 @@ public class FileUploadServiceImpl implements FileUploadService {
     @Override
     public FileUpload getFileById(long id) {
         Optional<FileUpload> fileUpload = fileUploadRepository.findById(id);
-//        if (!fileUploadRepository.existsById(id)) throw new RecordNotFoundException("file doesn't exist");
-//        return fileUploadRepository.findById(id);
         if (fileUpload.isPresent()){
             return fileUpload.get();
         }else{

@@ -1,7 +1,6 @@
 package com.example.eindopdrachtnovibackend.service;
 
 import com.example.eindopdrachtnovibackend.model.Customer;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 

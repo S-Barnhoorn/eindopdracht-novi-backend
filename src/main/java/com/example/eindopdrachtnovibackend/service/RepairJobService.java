@@ -14,9 +14,6 @@ import java.util.List;
         List<RepairJob> getByCustomerAgrees(String customerAgrees);
         List<RepairJob> getByRepairStatus(String repairStatus);
 
-//        Customer getByFirstName(String firstname);
-//        Customer getByPhoneNumber(Integer phoneNumber);
-
     }
 
 
