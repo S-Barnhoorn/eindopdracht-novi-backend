@@ -26,9 +26,6 @@ public class RepairJob {
     private String customerAgrees;
     private String repairStatus;
 
-//    @ManyToOne
-//    private Car car;
-
     @OneToMany(mappedBy = "repairJob")
     @JsonManagedReference
     private List<RepairItem> repairItem;
@@ -85,12 +82,4 @@ public class RepairJob {
     public void setExamination(String examination) {
         this.examination = examination;
     }
-
-//    public Car getCar() {
-//        return car;
-//    }
-//
-//    public void setCar(Car car) {
-//        this.car = car;
-//    }
 }

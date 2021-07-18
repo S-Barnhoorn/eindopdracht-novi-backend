@@ -89,7 +89,7 @@ public RepairJob addRepairJob (RepairDto repairDto){
     Customer customer = customerRepository.findById(repairDto.getCustomerId()).orElse(null);
 
     //Customer should only have one RepairJob
-    if (customer.getRepairJob()!=null) throw new BadRequestException();
+//    if (customer.getRepairJob()!=null) throw new BadRequestException();
     repairJob.setCustomer(customer);
     repairJob =  repairJobRepository.save(repairJob);
     for(RepairItem repairItem:repairJob.getRepairItem()){

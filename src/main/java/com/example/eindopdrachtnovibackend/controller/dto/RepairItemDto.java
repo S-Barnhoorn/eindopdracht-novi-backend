@@ -26,11 +26,12 @@ public class RepairItemDto {
     private Integer brakeDiscsPrice;
     private Integer brakeDiscsQuantity;
     private String repairBrakeDiscs;
+    private String other;
+    private Integer otherPrice;
 
 
     public static RepairItemDto fromRepairItem(RepairItem repairItem) {
         var dto = new RepairItemDto();
-        //dto.engine = repairItem.getEngine();
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.map(dto,repairItem);
 
@@ -39,12 +40,10 @@ public class RepairItemDto {
 
     public static RepairItem toRepairItem(RepairItemDto dto, RepairJob repairJob) {
         var item = new RepairItem();
-        //item.setEngine(dto.engine);
 
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.map(dto,item);
 
-        // this is the important bit, Item owns the relation!!!
         item.setRepairJob(repairJob);
         return item;
     }

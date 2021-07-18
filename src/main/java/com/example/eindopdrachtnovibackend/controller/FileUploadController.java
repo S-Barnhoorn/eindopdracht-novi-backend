@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.core.io.Resource;
 
 @RestController
-@RequestMapping("api/v1/")
+@RequestMapping("/api/v1/")
 @CrossOrigin
 public class FileUploadController {
 

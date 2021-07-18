@@ -80,7 +80,7 @@ import java.util.List;
         public ResponseEntity<Object> updateRepairJob(@PathVariable("id") long id, @RequestBody RepairJob updateRepairJob) {
             System.out.println(updateRepairJob);
             repairJobService.updateRepairJob(id, updateRepairJob);
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.noContent().build().ok("Updated");
         }
 
         @DeleteMapping("/repair-jobs/{id}")

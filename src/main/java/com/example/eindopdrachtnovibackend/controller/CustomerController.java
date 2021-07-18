@@ -50,27 +50,13 @@ public class CustomerController  {
     @PutMapping("/customer/{id}")
     public ResponseEntity<Object> updateCustomer(@PathVariable("id") long id, @RequestBody Customer updateCustomer) {
         customerService.updateCustomer(id, updateCustomer);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.noContent().build().ok("Updated");
     }
     @DeleteMapping("/customer/{id}")
     public ResponseEntity<Object> removeCustomer(@PathVariable("id") long id) {
         customerService.removeCustomer(id);
         return ResponseEntity.noContent().build().ok("Deleted");
     }
-
-//    @PostMapping("/customer/{id}/drivers-license")
-//    public void uploadDriversLicense(@PathVariable("id") Long id, @RequestParam("file") MultipartFile){
-//        try{
-//            CustomerService.uploadDriversLicense(id, file);
-//        } catch (Exception e){
-//            throw new RecordNotFoundException("File doesn't exist");
-//        }
-//    }
-
-//    @GetMapping("/customer/phonenumber")
-//    public Customer getCustomer(@RequestParam Integer phonenumber){
-//        return customerService.getByPhoneNumber(phonenumber);
-//    }
 
 }
 

@@ -1,7 +1,5 @@
 package com.example.eindopdrachtnovibackend.controller.dto;
 
-import com.example.eindopdrachtnovibackend.model.Customer;
-import com.example.eindopdrachtnovibackend.model.RepairItem;
 import com.example.eindopdrachtnovibackend.model.RepairJob;
 
 import java.util.List;
@@ -26,17 +24,12 @@ public class RepairDto {
 
     public static RepairDto fromRepairJob(RepairJob repairJob) {
         var dto = new RepairDto();
-//        dto.id = list.getId();
-//        dto.name = list.getName();
         dto.repairItemList = repairJob.getRepairItem().stream().map(RepairItemDto::fromRepairItem).collect(Collectors.toList());
         return dto;
     }
 
     public static RepairJob toRepairJob(RepairDto repairDto) {
         var list = new RepairJob();
-//        list.setId(dto.id);
-//        list.setName(dto.name);
-
         list.setRepairItem(repairDto.repairItemList.stream().map(itemDto -> RepairItemDto.toRepairItem(itemDto, list)).collect(Collectors.toList()));
 
         return list;

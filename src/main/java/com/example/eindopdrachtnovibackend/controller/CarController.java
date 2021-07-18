@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/")
@@ -24,21 +23,17 @@ public class CarController {
     @Autowired
     private CarService carService;
 
-    //krijgt verzoek binnen
     @GetMapping("/cars")
     public ResponseEntity<Object> getCar() {
         return ResponseEntity.ok(carService.getCar());
     }
 
-    //create employee rest API
     @PostMapping("/cars")
     public ResponseEntity<Object> addCar(@RequestBody CarDto carDto) {
         carService.addCar(carDto);
         return ResponseEntity.ok("Added");
     }
 
-    //get 1 employee
-    //krijgt verzoek binnen
     @GetMapping("/cars/{id}")
     public ResponseEntity<Object> getCar(@PathVariable("id") long id) {
         Car car = carService.getCar(id);
@@ -49,7 +44,7 @@ public class CarController {
     @PutMapping("/cars/{id}")
     public ResponseEntity<Object> updateCar(@PathVariable("id") long id, @RequestBody Car updateCar) {
         carService.updateCar(id, updateCar);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.noContent().build().ok("Updated");
     }
 
     @DeleteMapping("/cars/{id}")

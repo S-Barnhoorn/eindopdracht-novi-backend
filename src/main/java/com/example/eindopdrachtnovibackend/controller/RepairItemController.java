@@ -39,13 +39,13 @@ public class RepairItemController{
         return ResponseEntity.ok(repairItem);
     }
 
-    @GetMapping("/")
-
     @PutMapping("/repair-items/{id}")
     public ResponseEntity<Object> updateRepairItem(@PathVariable("id") long id, @RequestBody RepairItem updateRepairItem) {
         repairItemService.updateRepairItem(id, updateRepairItem);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.noContent().build().ok("Updated");
     }
+
+
     @DeleteMapping("/repair-items/{id}")
     public ResponseEntity<Object> removeRepairItem(@PathVariable("id") long id) {
         repairItemService.removeRepairItem(id);

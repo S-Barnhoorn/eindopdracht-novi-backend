@@ -36,13 +36,17 @@ public class RepairItem {
     private Integer brakeDiscsPrice;
     private Integer brakeDiscsQuantity;
     private String repairBrakeDiscs;
+    private String other;
+    private Integer otherPrice;
 
     @ManyToOne
     @JsonBackReference
     private RepairJob repairJob;
+
     public RepairItem(){
     }
-    public RepairItem(String inspection, Integer inspectionPrice, String exhaustPipe, Integer exhaustPipePrice, Integer exhaustPipeQuantity, String engine, Integer enginePrice, Integer engineQuantity, String brakePads, Integer brakePadsPrice, Integer brakePadsQuantity, String brakeDiscs, Integer brakeDiscsPrice, Integer getBrakeDiscsQuantity, String repairBrakeDiscs, String repairBrakePads, String repairEngine, String repairExhaustPipe) {
+
+    public RepairItem(String inspection, Integer inspectionPrice, String exhaustPipe, Integer exhaustPipePrice, Integer exhaustPipeQuantity, String engine, Integer enginePrice, Integer engineQuantity, String brakePads, Integer brakePadsPrice, Integer brakePadsQuantity, String brakeDiscs, Integer brakeDiscsPrice, Integer getBrakeDiscsQuantity, String repairBrakeDiscs, String repairBrakePads, String repairEngine, String repairExhaustPipe, String other, Integer otherPrice) {
         this.inspection = inspection;
         this.inspectionPrice = inspectionPrice;
         this.exhaustPipe = exhaustPipe;
@@ -61,6 +65,8 @@ public class RepairItem {
         this.brakeDiscsPrice = brakeDiscsPrice;
         this.brakeDiscsQuantity = getBrakeDiscsQuantity;
         this.repairBrakeDiscs = repairBrakeDiscs;
+        this.other = other;
+        this.otherPrice = otherPrice;
 
     }
     public long getId() {
@@ -69,6 +75,23 @@ public class RepairItem {
     public void setId(long id) {
         this.id = id;
     }
+
+    public String getOther() {
+        return other;
+    }
+
+    public void setOther(String other) {
+        this.other = other;
+    }
+
+    public Integer getOtherPrice() {
+        return otherPrice;
+    }
+
+    public void setOtherPrice(Integer otherPrice) {
+        this.otherPrice = otherPrice;
+    }
+
     public RepairJob getRepairJob() {
         return repairJob;
     }
