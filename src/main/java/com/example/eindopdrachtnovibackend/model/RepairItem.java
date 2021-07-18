@@ -14,6 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table
 public class RepairItem {
+
     @Id
     @GeneratedValue
     private long id;
@@ -35,6 +36,7 @@ public class RepairItem {
     private Integer brakeDiscsPrice;
     private Integer brakeDiscsQuantity;
     private String repairBrakeDiscs;
+
     @ManyToOne
     @JsonBackReference
     private RepairJob repairJob;
