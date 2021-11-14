@@ -6,7 +6,7 @@ import com.example.eindopdrachtnovibackend.model.Car;
 import java.util.List;
 
 public interface CarService {
-    List<Car> getCar();
+    List<Car> getCars();
     Car getCar(long id);
     Car addCar(CarDto carDto);
     void removeCar(long id);

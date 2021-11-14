@@ -23,6 +23,7 @@ import java.util.Optional;
 
         @Override
         public List<Customer> getCustomers() {
+
             return customerRepository.findAll();
         }
 
@@ -38,6 +39,7 @@ import java.util.Optional;
 
         @Override
         public Customer addCustomer(Customer customer) {
+
             return customerRepository.save(customer);
         }
 
