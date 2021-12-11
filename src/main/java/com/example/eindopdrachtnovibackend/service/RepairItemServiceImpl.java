@@ -35,7 +35,7 @@ public class RepairItemServiceImpl implements RepairItemService{
     }
 
     @Override
-    public RepairItem addRepairItem(RepairItem repairItem){
+    public RepairItem addRepairItems(RepairItem repairItem){
         return repairItemRepository.save(repairItem);
     }
 

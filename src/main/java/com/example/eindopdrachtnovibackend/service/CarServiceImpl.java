@@ -26,7 +26,7 @@ import java.util.Optional;
 
 
         @Override
-        public List<Car> getCar() {
+        public List<Car> getCars() {
             return carRepository.findAll();
 
         }

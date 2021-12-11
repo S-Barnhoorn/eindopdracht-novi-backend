@@ -24,8 +24,8 @@ public class CarController {
     private CarService carService;
 
     @GetMapping("/cars")
-    public ResponseEntity<Object> getCar() {
-        return ResponseEntity.ok(carService.getCar());
+    public ResponseEntity<Object> getCars() {
+        return ResponseEntity.ok(carService.getCars());
     }
 
     @PostMapping("/cars")

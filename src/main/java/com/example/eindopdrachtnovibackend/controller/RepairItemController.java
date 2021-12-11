@@ -23,14 +23,8 @@ public class RepairItemController{
     private RepairItemService repairItemService;
 
     @GetMapping("/repair-items")
-    public ResponseEntity<Object> getRepairItem() {
+    public ResponseEntity<Object> getRepairItems() {
         return ResponseEntity.ok(repairItemService.getRepairItem());
-    }
-
-    @PostMapping("/repair-items")
-    public ResponseEntity<Object> addRepairItem (@RequestBody RepairItem repairItem) {
-        repairItemService.addRepairItem(repairItem);
-        return ResponseEntity.ok("Added");
     }
 
     @GetMapping("/repair-items/{id}")
@@ -38,6 +32,13 @@ public class RepairItemController{
         RepairItem repairItem = repairItemService.getRepairItem(id);
         return ResponseEntity.ok(repairItem);
     }
+
+    @PostMapping("/repair-items")
+    public ResponseEntity<Object> addRepairItem (@RequestBody RepairItem repairItem) {
+        repairItemService.addRepairItems(repairItem);
+        return ResponseEntity.ok("Added");
+    }
+
 
     @PutMapping("/repair-items/{id}")
     public ResponseEntity<Object> updateRepairItem(@PathVariable("id") long id, @RequestBody RepairItem updateRepairItem) {

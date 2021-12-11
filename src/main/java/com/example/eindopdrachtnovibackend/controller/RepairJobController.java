@@ -33,6 +33,7 @@ import java.util.List;
 
         @GetMapping("/repair-jobs")
         public ResponseEntity<Object> getRepairJob() {
+
             return ResponseEntity.ok(repairJobService.getRepairJob());
         }
 
